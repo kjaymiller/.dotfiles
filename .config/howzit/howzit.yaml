@@ -1,0 +1,17 @@
+---
+:color: true
+:config_editor: nvim
+:editor: nvim
+:header_format: border
+:highlight: true
+:highlighter: mdcat
+:include_upstream: false
+:log_level: 1
+:matching: partial
+:multiple_matches: choose
+:output_title: false
+:pager: bat
+:paginate: true
+:show_all_code: false
+:show_all_on_error: false
+:wrap: 0
