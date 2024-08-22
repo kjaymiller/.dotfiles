@@ -20,8 +20,8 @@ config = {
 	font = wezterm.font("Mononoki Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" }),
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = "RESIZE",
-	window_background_opacity = 0.8,
-	text_background_opacity = 0.8,
+	window_background_opacity = 0.9,
+	text_background_opacity = 0.9,
 }
 
 return config
