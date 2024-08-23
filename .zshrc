@@ -14,9 +14,8 @@ alias lz="lazygit"
 alias ls="eza --icons=always"
 alias ll='ollama run "llama3.1"'
 
-for file in $(ls -1 --icons=never .zshrc_plugins/sources/*.sh); do
-  source "$file"
-done
+source ~/.zshrc_plugins/sources/fzf.sh
+source ~/.zshrc_plugins/sources/brewfile.sh
 
 export vimconf="~/.config/nvim/"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -24,5 +23,9 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval $(thefuck --alias)
 
-source ~/.git.aliases.sh
+
+# Add Aliases
+source ~/.zshrc_plugins/aliases/.git.aliases.sh
+source ~/.zshrc_plugins/aliases/.tmux.aliases.sh
+
 eval "$(starship init zsh)"
