@@ -3,7 +3,8 @@ source <(fzf --zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.config/fzf-git.sh/fzf-git.sh
 
-# -- Use fd instead of fzf --
+#
+# "Use fd instead of fzf"
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
