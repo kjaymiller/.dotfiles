@@ -14,7 +14,7 @@ alias lz="lazygit"
 alias ls="eza --icons=always"
 alias ll='ollama run "llama3.1"'
 
-source ~/.zshrc_plugins/sources/fzf.sh
+source ~/.zshrc_plugins/sources/atuin.sh
 source ~/.zshrc_plugins/sources/brewfile.sh
 
 export vimconf="~/.config/nvim/"
