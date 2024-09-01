@@ -162,10 +162,10 @@ if command -v git &>/dev/null; then
   alias gf='git fetch'
 
   # Fetch from and integrate with another repository or a local branch.
-  alias gp='git pull'
+  alias gpl='git pull'
 
   # Update remote refs along with associated objects.
-  alias gph='git push'
+  alias gp='git push'
 
   ##  ------------------------------------------------------------------
   ##  1.6 Aliases to record changes to the repository
