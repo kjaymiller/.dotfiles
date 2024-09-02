@@ -14,7 +14,6 @@ alias lz="lazygit"
 alias ls="eza --icons=always"
 alias ll='ollama run "llama3.1"'
 
-<<<<<<< HEAD
 source ~/.zshrc_plugins/sources/atuin.sh
 source ~/.zshrc_plugins/sources/brewfile.sh
 source ~/.zshrc_plugins/sources/fzf.sh
