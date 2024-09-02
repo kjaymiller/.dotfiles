@@ -1,3 +1,6 @@
 [submodule "catppuccin/catppuccin-tmux"]
 	path = catppuccin/catppuccin-tmux
 	url = git@github.com:kjaymiller/catppuccin-tmux.git
+[submodule ".config/catppucin-alacritty"]
+	path = .config/catppucin-alacritty
+	url = git@github.com:kjaymiller/alacritty.git
