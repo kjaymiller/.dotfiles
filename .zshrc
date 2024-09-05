@@ -26,6 +26,7 @@ eval $(thefuck --alias)
 
 # Add Aliases
 source ~/.zshrc_plugins/aliases/.git.aliases.sh
+source ~/.zshrc_plugins/aliases/.gh.aliases.sh
 source ~/.zshrc_plugins/aliases/.tmux.aliases.sh
 source ~/.zshrc_plugins/aliases/.python.aliases.sh
 

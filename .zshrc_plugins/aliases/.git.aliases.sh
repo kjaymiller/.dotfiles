@@ -172,20 +172,20 @@ if command -v git &>/dev/null; then
   ##  ------------------------------------------------------------------
 
   # Commit command to automatically "add" changes from all known files.
-  alias gc='git commit -a'
+  alias gc='git commit'
 
   # Amend the tip of the current branch rather than creating a new
   # commit.
-  alias gca='git commit --amend'
+  alias gca='git commit -a'
 
   # Commit all changes.
   alias gcall='git add -A && git commit -av'
 
   # Amend the tip of the current branch, and edit the message.
-  alias gcam='git commit --amend --message '
+  alias gcam='git commit -a --message '
 
   # Amend the tip of the current branch, and do not edit the message.
-  alias gcane='git commit --amend --no-edit'
+  alias gcamm='git commit --amend --no-edit'
 
   # Commit interactive.
   alias gcint='git commit --interactive'
