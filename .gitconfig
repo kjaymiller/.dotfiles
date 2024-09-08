@@ -2,3 +2,6 @@
 [user]
 	name = Jay Miller
 	email = kjaymiller@gmail.com
+
+[push]
+  autoSetupRemote = true
