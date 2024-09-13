@@ -18,6 +18,8 @@ source ~/.zshrc_plugins/sources/atuin.sh
 source ~/.zshrc_plugins/sources/brewfile.sh
 source ~/.zshrc_plugins/sources/fzf.sh
 source ~/.zshrc_plugins/sources/pyenv.sh
+source ~/.zshrc_plugins/sources/envrc.sh
+
 
 export vimconf="~/.config/nvim/"
 
