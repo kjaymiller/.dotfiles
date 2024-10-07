@@ -3,6 +3,7 @@
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
 export PATH=/opt/homebrew/opt:$PATH
+export PATH=$HOMEBREW_PREFIX/lib/ruby/gems/3.3.0/bin:$PATH
 
 export EDITOR=nvim
 
@@ -34,3 +35,5 @@ source ~/.zshrc_plugins/aliases/.python.aliases.sh
 
 eval "$(starship init zsh)"
 # source ~/.zshrc_plugins/sources/brewfile.sh
+eval "$(rbenv init -)"
+alias lst=ls -L 1 -T
