@@ -36,4 +36,4 @@ source ~/.zshrc_plugins/aliases/.python.aliases.sh
 eval "$(starship init zsh)"
 # source ~/.zshrc_plugins/sources/brewfile.sh
 eval "$(rbenv init -)"
-alias lst=ls -L 1 -T
+alias lst="ls -L 1 -T"
