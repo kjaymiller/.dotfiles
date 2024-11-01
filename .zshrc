@@ -31,9 +31,14 @@ eval $(thefuck --alias)
 source ~/.zshrc_plugins/aliases/.git.aliases.sh
 source ~/.zshrc_plugins/aliases/.gh.aliases.sh
 source ~/.zshrc_plugins/aliases/.tmux.aliases.sh
-source ~/.zshrc_plugins/aliases/.python.aliases.sh
+source ~/.zshrc_plugins/aliases/.python.aliases.sho
+
+. ~/.asdf/plugins/golang/set-env.zsh
 
 eval "$(starship init zsh)"
 # source ~/.zshrc_plugins/sources/brewfile.sh
 eval "$(rbenv init -)"
 alias lst="ls -L 1 -T"
+alias lsl="ls -l"
+alias rene="python -m render_engine new-entry routes:app"
+
