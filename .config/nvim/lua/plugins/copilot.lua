@@ -1,4 +1,4 @@
-return {
+--[[ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
@@ -9,4 +9,5 @@ return {
             markdown = false,
         },
     },
-}
+} ]]
+--
