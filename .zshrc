@@ -4,6 +4,7 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
 export PATH=/opt/homebrew/opt:$PATH
 export PATH=$HOMEBREW_PREFIX/lib/ruby/gems/3.3.0/bin:$PATH
+export PATH=$(go env GOPATH)/bin:$PATH
 
 export EDITOR=nvim
 
@@ -13,7 +14,7 @@ alias vvi=nvim
 alias nv=nvim
 alias lz="lazygit"
 alias ls="eza --icons=always"
-alias ll='ollama run "llama3.1"'
+alias ll='ollama run "llama3:latest"'
 
 source ~/.zshrc_plugins/sources/atuin.sh
 source ~/.zshrc_plugins/sources/brewfile.sh
@@ -40,5 +41,8 @@ eval "$(starship init zsh)"
 eval "$(rbenv init -)"
 alias lst="ls -L 1 -T"
 alias lsl="ls -l"
-alias rene="python -m render_engine new-entry routes:app"
-
+alias pbc="pbcopy"
+alias rene="python -m render_engine new-entry"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+alias inkscape=/Applications/Inkscape.app/Contents/MacOS/./inkscape
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
