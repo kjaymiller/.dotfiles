@@ -10,18 +10,10 @@ export EDITOR=nvim
 
 eval "$(zoxide init zsh)"
 
-alias vvi=nvim
 alias nv=nvim
 alias lz="lazygit"
 alias ls="eza --icons=always"
-alias ll='ollama run "llama3:latest"'
-
-source ~/.zshrc_plugins/sources/atuin.sh
-source ~/.zshrc_plugins/sources/brewfile.sh
-source ~/.zshrc_plugins/sources/fzf.sh
-source ~/.zshrc_plugins/sources/pyenv.sh
-source ~/.zshrc_plugins/sources/envrc.sh
-
+alias ll='ollama run "gpt-oss:latest"'
 
 export vimconf="~/.config/nvim/"
 
@@ -29,16 +21,21 @@ eval $(thefuck --alias)
 
 
 # Add Aliases
-source ~/.zshrc_plugins/aliases/.git.aliases.sh
-source ~/.zshrc_plugins/aliases/.gh.aliases.sh
-source ~/.zshrc_plugins/aliases/.tmux.aliases.sh
-source ~/.zshrc_plugins/aliases/.python.aliases.sh
+source ~/.dotfiles/zsh-plugins/aliases/.git.aliases.sh
+source ~/.dotfiles/zsh-plugins/aliases/.gh.aliases.sh
+source ~/.dotfiles/zsh-plugins/aliases/.tmux.aliases.sh
+source ~/.dotfiles/zsh-plugins/aliases/.python.aliases.sh
+
+# Source plugin configurations
+source ~/.dotfiles/zsh-plugins/sources/atuin.sh
+source ~/.dotfiles/zsh-plugins/sources/envrc.sh
+source ~/.dotfiles/zsh-plugins/sources/fzf.sh
+source ~/.dotfiles/zsh-plugins/sources/pyenv.sh
+# source ~/.dotfiles/zsh-plugins/sources/brewfile.sh
 
 . ~/.asdf/plugins/golang/set-env.zsh
 
 eval "$(starship init zsh)"
-# source ~/.zshrc_plugins/sources/brewfile.sh
-eval "$(rbenv init -)"
 alias lst="ls -L 1 -T"
 alias lsl="ls -l"
 alias pbc="pbcopy"
