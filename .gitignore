@@ -1,2 +1,6 @@
 .config/github-copilot/*
 .config/gh/hosts.yml
+.DS_Store
+.beads/
+AGENTS.md
+.gitattributes
