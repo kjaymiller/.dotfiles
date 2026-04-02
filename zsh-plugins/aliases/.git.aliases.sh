@@ -91,6 +91,8 @@ if command -v git &>/dev/null; then
   # Create an empty Git repository or reinitialize an existing one.
   alias gin='git init'
 
+  alias gwa='git worktree add .worktrees/'
+
   ##  ------------------------------------------------------------------
   ##  1.3 Aliases to examine the history and state
   ##  ------------------------------------------------------------------
@@ -331,7 +333,7 @@ if command -v git &>/dev/null; then
   alias gunpub='git push origin :$(git current-branch)'
 
   # Push current branch
-  # alias gpcb='git push origin "$(git branch|grep '\*'|tr -d '* \n')"'
+  # alias gpcb='git push origin "$(git branch | grep '\*' | tr -d '* \n')"'
 
   ##  ------------------------------------------------------------------
   ##  2.1 Aliases to manage set of tracked repositories
