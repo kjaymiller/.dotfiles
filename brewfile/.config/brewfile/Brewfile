@@ -1,0 +1,27 @@
+
+brew asdf
+brew azure-cli
+brew bat
+brew direnv
+brew eza
+brew fzf
+brew jq
+brew neovim
+brew openssl
+brew prek
+brew uv
+brew pyenv
+brew ripgrep
+brew termshot
+brew thefuck
+brew zoxide
+
+cask font-fira-code-nerd-font
+cask font-jetbrains-mono-nerd-font
+cask font-mononoki-nerd-font
+
+cask discord
+cask orbstack
+cask microsoft-azure-storage-explorer
+cask zoom
+
