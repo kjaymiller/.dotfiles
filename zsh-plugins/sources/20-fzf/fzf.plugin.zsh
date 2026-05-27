@@ -1,11 +1,8 @@
 # setup fzf
 source <(fzf --zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.config/fzf-git.sh/fzf-git.sh
 
-#
 # "Use fd instead of fzf"
-
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -21,3 +18,9 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
+
+# fzf sub-plugins (managed here so the main loader leaves them alone)
+autoload -U compinit; compinit
+source "${0:A:h}/fzf-tab/fzf-tab.plugin.zsh"
+source "${0:A:h}/fzf-git/fzf-git.sh"

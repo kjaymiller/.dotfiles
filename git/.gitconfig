@@ -4,7 +4,7 @@
 [user]
 	name = Jay Miller
 	email = kjaymiller@gmail.com
-	signingkey = /Users/jay.miller/.ssh/id_ed25519.pub
+	signingkey = /Users/kjaymiller/.ssh/id_ed25519.pub
 
 [push]
   autoSetupRemote = true
