@@ -1,0 +1,39 @@
+[bootstrap.mise_shell_activate]
+zsh = true
+# ~/.zshrc is a symlink into ~/.dotfiles/zsh, so mise can't edit it.
+# The activation block lives in the repo file instead.
+zshrc = false
+
+[bootstrap.packages]
+"dnf:openssl-devel" = "latest"
+"dnf:postgresql-server" = "latest"
+
+[bootstrap.repos]
+"~/kjaymiller.com" = {url = "git@github.com:kjaymiller/kjaymiller.com.git"}
+
+[tools]
+1password = "latest"
+1password-cli = "latest"
+age = "latest"
+atuin = "latest"
+bat-extras = "latest"
+betterleaks = "latest"
+bat = "latest"
+delta = "latest"
+fd = "latest"
+eza = "latest"
+cloudflared = "latest"
+flyctl = "latest"
+fnox = "latest"
+fzf = "latest"
+"http:fzf-tab" = { version = "1.3.0", url = "https://github.com/aloxaf/fzf-tab/archive/refs/tags/v1.3.0.tar.gz" }
+gh = "latest"
+glow = "latest"
+gum = "latest"
+neovim = "latest"
+pi = "latest"
+starship = "latest"
+zellij = "latest"
+zoxide = "latest"
+[dotfiles]
+"~/.zshrc" = "~/.dotfiles/zsh/.zshrc"

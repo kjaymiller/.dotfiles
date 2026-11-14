@@ -1,1 +1,0 @@
-alias bf="brew file"
