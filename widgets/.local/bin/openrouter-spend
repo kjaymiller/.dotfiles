@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""Show OpenRouter spend for the current month, by model, plus total.
+
+Uses a Management Key (OPENROUTER_MANAGEMENT_KEY env var) for the per-model
+activity breakdown, and falls back to the regular API key for total credits.
+
+Link to dashboard: https://openrouter.ai/activity
+"""
+
+import json
+import os
+import sys
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+
+ACTIVITY_URL = "https://openrouter.ai/api/v1/activity"
+CREDITS_URL = "https://openrouter.ai/api/v1/credits"
+DASHBOARD_URL = "https://openrouter.ai/activity"
+
+
+def load_pi_key():
+    """Fall back to the key pi has stored."""
+    auth = Path.home() / ".pi" / "agent" / "auth.json"
+    try:
+        return json.loads(auth.read_text())["openrouter"]["key"]
+    except Exception:
+        return None
+
+
+def get(url, key):
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {key}"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read())
+
+
+def main():
+    mgmt_key = os.environ.get("OPENROUTER_MANAGEMENT_KEY") or load_pi_key()
+    month_start = datetime.now(timezone.utc).strftime("%Y-%m-01")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    print(f"OpenRouter spend: {month_start} → {today}")
+    print(f"Dashboard: {DASHBOARD_URL}\n")
+
+    # --- Per-model breakdown (requires management key) ---
+    by_model = {}
+    monthly_total = 0.0
+    try:
+        page = 1
+        while True:
+            data = get(f"{ACTIVITY_URL}?page={page}", mgmt_key)
+            rows = data.get("data", [])
+            if not rows:
+                break
+            for row in rows:
+                if row.get("date", "") >= month_start:
+                    monthly_total += row.get("usage", 0.0)
+                    for model, cost in row.get("by_model", {}).items():
+                        by_model[model] = by_model.get(model, 0.0) + cost
+            if page >= 10:
+                break
+            page += 1
+
+        if not by_model:
+            print("No usage recorded this month yet.\n")
+        else:
+            width = max(len(m) for m in by_model) + 2
+            print(f"{'MODEL':<{width}}SPEND")
+            for model, cost in sorted(by_model.items(), key=lambda kv: -kv[1]):
+                print(f"{model:<{width}}${cost:>8.4f}")
+            print(f"\n{'TOTAL':<{width}}${monthly_total:>8.4f}\n")
+    except Exception as e:
+        msg = str(e)
+        if "403" in msg or "management" in msg.lower():
+            print("Per-model breakdown needs a Management Key:")
+            print("  1. Create one at https://openrouter.ai/settings/keys")
+            print("  2. export OPENROUTER_MANAGEMENT_KEY=sk-or-v1-mgmt-...\n")
+        else:
+            print(f"Could not fetch activity: {msg}\n")
+
+    # --- Lifetime totals (works with any key) ---
+    try:
+        data = get(CREDITS_URL, mgmt_key)["data"]
+        remaining = data["total_credits"] - data["total_usage"]
+        print(f"Lifetime usage:  ${data['total_usage']:.2f}")
+        print(f"Lifetime limit:  ${data['total_credits']:.2f}")
+        print(f"Remaining:       ${remaining:.2f}")
+    except Exception as e:
+        print(f"Could not fetch credits: {e}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

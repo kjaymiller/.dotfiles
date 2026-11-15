@@ -1,0 +1,6 @@
+[Unit]
+Description=Refresh OpenRouter spend dashboard HTML
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/node %h/.local/bin/openrouter-spend-gen.mjs

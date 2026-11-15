@@ -1,0 +1,13 @@
+[Unit]
+Description=wpaperd - Wayland wallpaper daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/share/mise/installs/cargo-wpaperd/latest/bin/wpaperd
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

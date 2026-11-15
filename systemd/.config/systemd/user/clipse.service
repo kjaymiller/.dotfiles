@@ -1,0 +1,13 @@
+[Unit]
+Description=Clipse clipboard manager daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/clipse -listen
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target

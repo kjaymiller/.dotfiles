@@ -21,7 +21,7 @@ Fork the repo, clone it, and cd into the repo directory.
 
 #### Install All Packages
 ```bash
-stow zsh git tmux nvim wezterm bat gh starship zellij karabiner aerospace thefuck howzit searchlink alacritty brew
+stow zsh git tmux nvim wezterm bat gh starship zellij karabiner aerospace thefuck howzit searchlink alacritty brew widgets systemd
 ```
 
 #### Install Specific Package Groups
@@ -45,6 +45,17 @@ Window management:
 ```bash
 stow aerospace karabiner
 ```
+
+### Bootstrap Scripts
+
+Some setup can't be handled by symlinking alone (fonts, packages, etc.). Run these after stowing:
+
+```bash
+./bootstrap/install-nerd-fonts.sh          # Nerd Fonts (default: JetBrainsMono)
+./bootstrap/install-nerd-fonts.sh FiraCode # or another font
+```
+
+See [bootstrap/README.md](bootstrap/README.md) for details.
 
 ### Individual Package Installation
 

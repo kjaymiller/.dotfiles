@@ -1,0 +1,93 @@
+#!/usr/bin/env -S gjs -m
+// deskcal — desktop calendar widget (layer-shell, background layer, behind windows)
+import GLib from "gi://GLib";
+import Gtk from "gi://Gtk?version=3.0";
+import Gdk from "gi://Gdk";
+import Gio from "gi://Gio";
+import GtkLayerShell from "gi://GtkLayerShell?version=0.1";
+import Cairo from "gi://cairo";
+
+const CACHE = GLib.get_home_dir() + "/.cache/deskcal.markup";
+const DAEMON = ["/usr/bin/python3", "/home/kjaymiller/.local/bin/deskcal-daemon.py"];
+const REFRESH_MS = 5000;
+
+Gtk.init(null);
+
+const win = new Gtk.Window({ type: Gtk.WindowType.TOPLEVEL });
+const box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 2 });
+const label = new Gtk.Label({ xalign: 0, yalign: 0 });
+box.pack_start(label, false, false, 0);
+win.add(box);
+
+// styling: rounded dark panel like the rofi popups
+const css = new Gtk.CssProvider();
+css.load_from_data(`
+window { background-color: rgba(0,0,0,0); }
+.panel {
+  background-color: rgba(30, 30, 34, 0.88);
+  border: 2px solid #a979ec;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+label { font-family: "JetBrainsMono Nerd Font"; font-size: 10px; }
+`);
+const screen = Gdk.Screen.get_default();
+Gtk.StyleContext.add_provider_for_screen(
+  screen, css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+);
+win.get_style_context().add_class("panel");
+
+// layer-shell: bottom layer, anchored top-right, below the bar
+// (BOTTOM = above the wallpaper daemon's background layer, still behind windows)
+GtkLayerShell.init_for_window(win);
+GtkLayerShell.set_layer(win, GtkLayerShell.Layer.BOTTOM);
+GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.TOP, true);
+GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.RIGHT, true);
+GtkLayerShell.set_margin(win, GtkLayerShell.Edge.TOP, 34);
+GtkLayerShell.set_margin(win, GtkLayerShell.Edge.RIGHT, 16);
+GtkLayerShell.set_namespace(win, "deskcal");
+
+// transparent window so the panel's rounded corners show cleanly
+const visual = screen.get_rgba_visual();
+if (visual) {
+  win.set_visual(visual);
+  win.set_app_paintable(true);
+}
+
+let lastText = null;
+
+function update() {
+  try {
+    const [, file] = GLib.file_get_contents(CACHE);
+    const text = new TextDecoder().decode(file);
+    if (text !== lastText) {
+      lastText = text;
+      label.set_markup(text);
+    }
+  } catch (e) {
+    label.set_markup('<span foreground="#6c7086">loading calendar…</span>');
+  }
+  return true; // keep the timer running
+}
+
+// make sure the data daemon is running (it self-locks, duplicates exit)
+function ensureDaemon() {
+  try {
+    GLib.spawn_async(null, DAEMON, null,
+      GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
+  } catch (e) {
+    console.error("daemon spawn failed:", e);
+  }
+}
+
+ensureDaemon();
+update();
+GLib.timeout_add(GLib.PRIORITY_DEFAULT, REFRESH_MS, update);
+
+win.show_all();
+
+// click-through: never block the desktop (needs the GDK window realized)
+const empty = new Cairo.Region();
+win.get_window().input_shape_combine_region(empty, 0, 0);
+
+Gtk.main();
