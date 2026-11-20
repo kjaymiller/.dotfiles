@@ -4,3 +4,4 @@
 .beads/
 AGENTS.md
 .gitattributes
+*.pyc
