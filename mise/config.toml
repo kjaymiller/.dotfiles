@@ -5,6 +5,12 @@ zsh = true
 zshrc = false
 
 [bootstrap.packages]
+"dnf:gcc" = "latest"                  # cc — Rust linker, required by cargo:wpaperd
+"dnf:gcc-c++" = "latest"
+"dnf:make" = "latest"
+"dnf:pkgconf-pkg-config" = "latest"    # pkg-config — finds .pc files for native deps
+"dnf:libxcb-devel" = "latest"          # needed by wpaperd
+"dnf:libxkbcommon-devel" = "latest"    # needed by wpaperd
 "dnf:openssl-devel" = "latest"
 "dnf:postgresql-server" = "latest"
 "dnf:wayland-devel" = "latest"     # wayland-client.pc — needed by wpaperd
