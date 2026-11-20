@@ -260,26 +260,28 @@ plugins {
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
 //
-// themes {
-//     dracula {
-//         fg 248 248 242
-//         bg 40 42 54
-//         red 255 85 85
-//         green 80 250 123
-//         yellow 241 250 140
-//         blue 98 114 164
-//         magenta 255 121 198
-//         orange 255 184 108
-//         cyan 139 233 253
-//         black 0 0 0
-//         white 255 255 255
-//     }
-// }
+// Pink palette matching niri/waybar (hue 320):
+//   #ec79c9 accent, #b5709e mid, #7a676d muted, #2b2329 dark plum
+themes {
+    pink-niri {
+        fg 245 227 238
+        bg 43 35 41
+        black 28 24 27
+        red 245 60 60
+        green 38 166 91
+        yellow 229 192 123
+        blue 181 112 158
+        magenta 236 121 201
+        cyan 218 142 184
+        white 240 227 235
+        orange 255 155 205
+    }
+}
 
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "catppuccin-mocha"
+theme "pink-niri"
 
 // The name of the default layout to load on startup
 // Default: "default"

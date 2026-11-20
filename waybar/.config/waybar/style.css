@@ -1,0 +1,156 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+#window {
+  padding-left: 5px;
+}
+
+window#waybar {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(181, 112, 158, 0.4);
+}
+
+tooltip {
+  background: rgba(43, 35, 41, 0.5);
+  border: 1px solid rgba(122, 103, 109, 0.5);
+}
+
+tooltip label {
+  color: white;
+}
+
+#workspaces button {
+  padding: 5px;
+  background: transparent;
+  color: white;
+}
+
+#workspaces {
+  margin: 5px;
+  padding: 0.1rem;
+  background-color: #ec79c9;
+  border-radius: 10em;
+}
+
+#workspaces button.active {
+  background-color: #b5709e;
+  border-radius: 10em;
+}
+
+#mode,
+#custom-battery,
+#cpu,
+#memory {
+  padding: 0 10px;
+}
+
+#mode {
+  background: #7a676d;
+  border-bottom: 3px solid white;
+}
+
+#custom-battery {
+  background-color: #e5c07b; /* yellow: mid charge (30-84%) */
+  color: white;
+  margin: 5px;
+  border-radius: 10em;
+}
+
+#custom-battery.green {
+  background-color: #26a65b; /* green: full / charging (>=85%) */
+}
+
+#custom-battery.red {
+  background-color: #f53c3c; /* red: near empty (<30%) */
+}
+
+#cpu {
+  background-color: #7a676d;
+}
+
+#memory {
+  background-color: #7a676d;
+}
+
+#custom-battery.critical {
+  background-color: #f53c3c; /* critical: <= 5% discharging */
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: black;
+  }
+}
+
+/* Blink only at critical battery (<= 5%) */
+#custom-battery.critical {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Time/calendar group */
+#cal {
+  padding: 0 0.5rem;
+  margin: 0.5rem;
+  background-color: #7a676d;
+  border-radius: 15px;
+}
+
+#cal #custom-cal,
+#cal #clock {
+  padding: 0 0.5rem;
+  margin: 0.25rem;
+  background: transparent;
+}
+
+/* CPU/RAM group */
+#sys {
+  padding: 0 0.5rem;
+  margin: 0.5rem;
+  background-color: #7a676d;
+  border-radius: 15px;
+}
+
+#sys #cpu,
+#sys #memory {
+  padding: 0 0.5rem;
+  margin: 0.25rem;
+  background: transparent;
+}
+
+/* The group container itself */
+#net {
+  padding: 0;
+  background-color: #ec79c9;
+  padding: 0 0.5rem;
+  margin: 0.5rem;
+  border-radius: 15px;
+}
+
+/* Child modules inside the group */
+#custom-tailscale {
+  padding: 0 0.5rem;
+  margin: 0.25rem;
+}
+
+#network {
+  padding: 0 0.5rem;
+  margin: 0.25rem;
+}
+
+#custom-tailscale:hover {
+  background-color: rgba(255, 155, 205, 1);
+}
+
+#network:hover {
+  background-color: rgba(255, 155, 205, 1);
+}

@@ -1,0 +1,78 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["niri/workspaces", "niri/window"],
+  "modules-right": ["group/net", "group/sys", "custom/battery", "group/cal"],
+  "niri/workspaces": {
+    "max-length": 50,
+    "format": "{}",
+  },
+  "group/net": {
+    "orientation": "horizontal",
+    "modules": ["custom/tailscale", "custom/bluetooth", "network#wifi"],
+  },
+  "custom/bluetooth": {
+    "exec": "~/.config/waybar/bluetooth-status.sh",
+    "return-type": "json",
+    "interval": 15,
+    "on-click": "sh -c 'echo click $(date +%T) >> /tmp/waybar-click.log; bt-menu >> /tmp/bt-menu.log 2>&1'",
+  },
+  "custom/tailscale": {
+    "exec": "~/.config/waybar/tailscale-tooltip.sh",
+    "return-type": "json",
+    "interval": 15,
+    "on-click": "ts-menu",
+  },
+  "network#wifi": {
+    "interface": "wld0",
+    "format-disconnected": "󰤭 offline",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"], // none, weak → strong
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": "󰤭 ",
+    "tooltip-format": "{essid} ({signalStrength}%) ⏓ {bandwidthDownBytes} ⏑ {bandwidthUpBytes}",
+    "format": "{icon}  {essid}",
+    "on-click": "wifi-menu",
+  },
+  "niri/window": {
+    "max-length": 50,
+    "format": "{title}",
+    "icon": true,
+    "rewrite": {
+      "(\\w+-\\w+)(\\ \\|* *.*)*": "Zellij: $1",
+      "(.*) Zen Browser": "Zen: $1",
+    },
+  },
+  "group/sys": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory"],
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "󰻠 {usage}%",
+    "max-length": 10,
+    "on-click": "~/.config/waybar/process-menu.sh",
+  },
+  "memory": {
+    "interval": 5,
+    "format": "󰍛 {percentage}%",
+    "max-length": 10,
+    "on-click": "~/.config/waybar/process-menu.sh",
+  },
+  "custom/battery": {
+    "exec": "~/.config/waybar/battery-status.sh",
+    "return-type": "json",
+    "interval": 60,
+  },
+  "group/cal": {
+    "orientation": "horizontal",
+    "modules": ["clock#cal", "clock"],
+  },
+  "clock#cal": {
+    "format": "{:%d %b %Y}",
+    "interval": 120,
+    "on-click": "~/.local/bin/cal-rofi",
+  },
+  "clock": {
+    "on-click": "~/.local/bin/cal-rofi",
+  },
+}

@@ -1,9 +1,10 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.
 export EDITOR=nvim
 
 # >>> mise:activate >>> managed by mise — do not edit between markers
-eval "$(mise activate zsh)"
+# eval "$(mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 # <<< mise:activate <<<
 
 eval "$(starship init zsh)"

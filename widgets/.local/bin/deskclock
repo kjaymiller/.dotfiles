@@ -1,0 +1,72 @@
+#!/usr/bin/env -S gjs -m
+// deskclock — big desktop clock widget (layer-shell, centered in the backdrop)
+// Styled like the rofi popups: purple accent. Hour large & bold, minutes
+// half the size in a darker purple. Click-through, behind all windows.
+
+import GLib from "gi://GLib";
+import Gtk from "gi://Gtk?version=3.0";
+import Gdk from "gi://Gdk";
+import Cairo from "gi://cairo";
+import GtkLayerShell from "gi://GtkLayerShell?version=0.1";
+
+const HOUR_FONT = "Adwaita Sans 150";
+const MINUTE_FONT = "Adwaita Sans 48"; // medium weight, tucked tight next to the hour
+const PURPLE = "#a979ec";   // rofi popup accent — the hour
+const PURPLE_DARK = "#6b4fa8"; // darker purple — the minutes
+const MUTED = "#6c7086";    // the colon
+const TICK_MS = 1000;
+
+Gtk.init(null);
+
+const win = new Gtk.Window({ type: Gtk.WindowType.TOPLEVEL });
+const label = new Gtk.Label({ xalign: 0.5, yalign: 0.5 });
+win.add(label);
+
+// fully transparent window: just text floating on the wallpaper
+const css = new Gtk.CssProvider();
+css.load_from_data(`
+window { background-color: rgba(0,0,0,0); }
+label { font-family: "Adwaita Sans"; }
+`);
+const screen = Gdk.Screen.get_default();
+Gtk.StyleContext.add_provider_for_screen(
+  screen, css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+);
+
+const visual = screen.get_rgba_visual();
+if (visual) {
+  win.set_visual(visual);
+  win.set_app_paintable(true);
+}
+
+// layer-shell: bottom layer, unanchored => dead-center of the screen
+GtkLayerShell.init_for_window(win);
+GtkLayerShell.set_layer(win, GtkLayerShell.Layer.BOTTOM);
+GtkLayerShell.set_namespace(win, "deskclock");
+
+let lastText = null;
+
+function update() {
+  const d = new Date();
+  const h = String(d.getHours()).padStart(2, "0");
+  const m = String(d.getMinutes()).padStart(2, "0");
+  const markup =
+    `<span font="${HOUR_FONT}" weight="bold" foreground="${PURPLE}">${h}</span>` +
+    `<span font="${MINUTE_FONT}" weight="medium" foreground="${PURPLE_DARK}">${m}</span>`;
+  if (markup !== lastText) {
+    lastText = markup;
+    label.set_markup(markup);
+  }
+  return true; // keep the timer running
+}
+
+update();
+GLib.timeout_add(GLib.PRIORITY_DEFAULT, TICK_MS, update);
+
+win.show_all();
+
+// click-through: never block the desktop (needs the GDK window realized)
+const empty = new Cairo.Region();
+win.get_window().input_shape_combine_region(empty, 0, 0);
+
+Gtk.main();

@@ -20,7 +20,7 @@ _fzf_compgen_dir() {
 }
 
 
-# fzf sub-plugins (managed here so the main loader leaves them alone)
+# fzf sub-plugins (installed via mise; see mise/config.toml)
 autoload -U compinit; compinit
-source "${0:A:h}/fzf-tab/fzf-tab.plugin.zsh"
-source "${0:A:h}/fzf-git/fzf-git.sh"
+source "$(mise where http:fzf-tab)/fzf-tab.plugin.zsh"
+source "$(mise where http:fzf-git)/fzf-git.sh"

@@ -1,0 +1,68 @@
+/* launcher theme — app menu (drun), matches the fuzzel look */
+/* Catppuccin Mocha palette */
+* {
+    font: "JetBrainsMono Nerd Font 12";
+    background-color: transparent;
+    text-color: rgba(205, 214, 244, 100%);
+}
+
+window {
+    location: center;
+    width: 640px;
+    padding: 12px 24px;
+    background-color: rgba(30, 30, 46, 87%);
+    border: 2px;
+    border-color: rgba(169, 121, 236, 100%);
+    border-radius: 12px;
+}
+
+inputbar {
+    margin: 0 0 8px 0;
+    padding: 6px 8px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: rgba(108, 112, 134, 100%);
+    margin: 0 4px 0 0;
+}
+
+entry {
+    text-color: rgba(205, 214, 244, 100%);
+    placeholder: "search…";
+    placeholder-color: rgba(108, 112, 134, 100%);
+}
+
+listview {
+    lines: 8;
+    fixed-height: false;
+    scrollbar: false;
+    spacing: 2px;
+}
+
+element {
+    padding: 4px 8px;
+    border-radius: 8px;
+    children: [ element-icon, element-text ];
+}
+
+element-icon {
+    size: 1.4em;
+    margin: 0 8px 0 0;
+}
+
+element-text {
+    text-color: inherit;
+    highlight: rgba(243, 139, 168, 100%);
+    vertical-align: 0.5;
+}
+
+element selected.normal, element selected.active {
+    background-color: rgba(137, 180, 250, 100%);
+    text-color: rgba(30, 30, 46, 100%);
+}
+
+element selected {
+    /* keep the match highlight readable on the blue selection */
+    border-radius: 8px;
+}
